@@ -1,22 +1,15 @@
-import uploadPhoto from './5-photo-reject'; // Adjust the import based on your structure
-import signUpUser from './4-user-promise'; // Adjust the import based on your structure
+import { uploadPhoto, createUser } from './utils'; // Importing the required functions
 
 export default async function asyncUploadUser() {
-  try {
-    // Call uploadPhoto and createUser functions and wait for their responses
-    const photoResponse = await uploadPhoto('filename.jpg'); // Pass a valid filename
-    const userResponse = await signUpUser('Guillaume', 'Salva'); // Pass user details
+  let res = {}; // Initialize an empty object for the response
 
-    // Return an object with the responses
-    return {
-      photo: photoResponse,
-      user: userResponse,
-    };
-  } catch (error) {
-    // If any of the async functions fail, return an empty object
-    return {
-      photo: null,
-      user: null,
-    };
+  try {
+    const photo = await uploadPhoto(); // Await the resolution of uploadPhoto
+    const user = await createUser(); // Await the resolution of createUser
+    res = { photo, user }; // If both succeed, assign the results to res
+  } catch (err) {
+    res = { photo: null, user: null }; // If any promise fails, set both to null
   }
+  
+  return res; // Return the response object
 }
