@@ -6,8 +6,12 @@ export default class EVCar extends Car {
     this._range = range; // Add the new attribute for EVCar
   }
 
+  static get [Symbol.species]() {
+    return Car; // Specify that the species for cloning should return Car
+  }
+
   cloneCar() {
-    // Return an instance of Car instead of EVCar
-    return new Car(this._brand, this._motor, this._color);
+    // Use the Symbol.species to create a new instance of Car
+    return new (this.constructor[Symbol.species])(this._brand, this._motor, this._color);
   }
 }
