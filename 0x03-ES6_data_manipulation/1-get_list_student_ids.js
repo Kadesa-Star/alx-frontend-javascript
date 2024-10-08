@@ -7,5 +7,5 @@ export default function getListStudentIds(arr) {
     newArr = arr.map(item => item.id);
   }
 
-  return newArr; // Return the array of ids
+  return newArr;
 }
