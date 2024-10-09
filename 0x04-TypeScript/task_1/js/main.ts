@@ -1,21 +1,26 @@
 // Step 1: Define the Teacher interface
 interface Teacher {
-  readonly firstName: string; // This means 'firstName' can only be set during initialization
-  readonly lastName: string;  // Same as above for 'lastName'
-  fullTimeEmployee: boolean;  // This attribute is mandatory
-  yearsOfExperience?: number; // Optional attribute
-  location: string;           // Mandatory attribute
-  [key: string]: any;         // Index signature to allow additional properties
+  readonly firstName: string;  // Can only be set during initialization
+  readonly lastName: string;   // Same as above
+  fullTimeEmployee: boolean;   // Required attribute
+  yearsOfExperience?: number;  // Optional attribute
+  location: string;            // Required attribute
+  [key: string]: any;          // Allows additional attributes
 }
 
-// Step 2: Initialize the teacher object with required properties and additional attributes
-const teacher3: Teacher = {
+// Step 2: Define the Directors interface that extends Teacher
+interface Directors extends Teacher {
+  numberOfReports: number;     // New required attribute specific to Directors
+}
+
+// Step 3: Initialize a Directors object
+const director1: Directors = {
   firstName: 'John',
   lastName: 'Doe',
-  fullTimeEmployee: false,
+  fullTimeEmployee: true,
   location: 'London',
-  contract: false, // Extra attribute not explicitly defined in the interface
+  numberOfReports: 17,         // Required by Directors interface
 };
 
-// Step 3: Log the object to verify the implementation
-console.log(teacher3);
+// Step 4: Log the Directors object to the console
+console.log(director1);
