@@ -52,7 +52,20 @@ function createEmployee(salary: number | string): Director | Teacher {
   return new Director();
 }
 
-// Step 6: Test the createEmployee function
-console.log(createEmployee(200)); // Teacher
-console.log(createEmployee(1000)); // Director
-console.log(createEmployee('$500')); // Director
+// Step 6: Implement the isDirector function
+function isDirector(employee: Director | Teacher): employee is Director {
+  return employee instanceof Director;
+}
+
+// Step 7: Implement the executeWork function
+function executeWork(employee: Director | Teacher): void {
+  if (isDirector(employee)) {
+    console.log(employee.workDirectorTasks());
+  } else {
+    console.log(employee.workTeacherTasks());
+  }
+}
+
+// Step 8: Test the executeWork function
+executeWork(createEmployee(200)); // Getting to work
+executeWork(createEmployee(1000)); // Getting to director tasks
